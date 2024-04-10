@@ -2,7 +2,6 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-
 const getOrderTypes = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/orderTypes`, {
     method: 'GET',
@@ -15,4 +14,4 @@ const getOrderTypes = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getOrderTypes }
+export default getOrderTypes;

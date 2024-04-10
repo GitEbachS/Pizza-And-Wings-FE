@@ -46,16 +46,6 @@ OrderCard.propTypes = {
     orderTypeId: PropTypes.number,
     orderType: PropTypes.string,
     status: PropTypes.bool,
-    itemTotal: PropTypes.number,
-    tip: PropTypes.number,
-    paymentTypeId: PropTypes.number,
-    paymentType: PropTypes.string,
-    totalWithTip: PropTypes.number,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      orderPrice: PropTypes.number,
-    })),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

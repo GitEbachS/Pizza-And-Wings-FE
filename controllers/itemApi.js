@@ -26,6 +26,18 @@ const addItemToOrder = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getAllItems = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/allItems`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
-  addItemToOrder, deleteOrderItem
-}
+  addItemToOrder, deleteOrderItem, getAllItems,
+};

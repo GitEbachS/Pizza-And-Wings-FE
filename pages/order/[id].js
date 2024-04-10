@@ -1,58 +1,63 @@
-// return (
-//   <Card className="card-style" style={{ width: '38rem' }}>
-//     <Card.Body>
-//       <Card.Title className="orderTitle">Order#{orderObj.id}</Card.Title>
-//       <h4>Customer Name: {orderObj.fullName}</h4>
-//       <h4>Customer Email: {orderObj.email}</h4>
-//       <h4>Customer Phone: {orderObj.phone}</h4>
-//       <h4>Order Type: {orderObj.orderType}</h4>
-//       <h4>Payment Type: {orderObj.paymentType}</h4>
-//       <h4>Order Status: {orderObj.status ? 'Open' : 'Closed'}</h4>
-//       <h4>Order Tip: {orderObj.tip}</h4>
-//       <h4>Total Before Tip: {orderObj.itemTotal}</h4>
-//       <h4>Order Total With Tip: {orderObj.totalWithTip}</h4>
-//       <h4>Date Closed: {orderObj.dateClosed}</h4>
-//       <div className="wrapper">
-//         <Link href={`/order/${orderObj.id}`} passHref>
-//           <div>
-//             <Button id="viewbtn" className="viewBtn m-2">VIEW</Button>
-//           </div>
-//         </Link>
-//         <h3 className="orderTitle">List of Products:</h3>
-//         <div>
-//           {orderObj.items?.map((item) => (
-//             <ItemCard key={item.id} orderObj={orderObj} onUpdate={}>
-//           ))}
-//         </div>
-//         <Button variant="outline-warning" size="sm" onClick={deleteThisOrder} className="deleteBtn m-2">
-//           DELETE
-//         </Button>
-//       </div>
-//     </Card.Body>
-//   </Card>
-// );
-// }
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { getSingleOrder } from '../../controllers/orderApi';
+import ItemCard from '../../components/ItemCard';
+import { getAllItems } from '../../controllers/itemApi';
 
-// OrderCard.propTypes = {
-// orderObj: PropTypes.shape({
-//   id: PropTypes.number,
-//   fullName: PropTypes.string,
-//   dateClosed: PropTypes.string,
-//   email: PropTypes.string,
-//   phone: PropTypes.string,
-//   orderTypeId: PropTypes.number,
-//   orderType: PropTypes.string,
-//   status: PropTypes.bool,
-//   itemTotal: PropTypes.number,
-//   tip: PropTypes.number,
-//   paymentTypeId: PropTypes.number,
-//   paymentType: PropTypes.string,
-//   totalWithTip: PropTypes.number,
-//   items: PropTypes.arrayOf(PropTypes.shape({
-//     id: PropTypes.number,
-//     name: PropTypes.string,
-//     orderPrice: PropTypes.number,
-//   })),
-// }).isRequired,
-// onUpdate: PropTypes.func.isRequired,
-// };
+export default function ViewOrder() {
+  const router = useRouter();
+  const { id } = router.query;
+  const [order, setOrder] = useState({});
+  const [allItems, setAllItems] = useState([]);
+  const [isClosed, setIsClosed] = useState(false);
+
+  const getOrderDetails = () => {
+    getSingleOrder(id)?.then(setOrder);
+  };
+
+  const getAllTheItems = () => {
+    getAllItems().then((items) => {
+      setAllItems(items);
+      if (!order.status) {
+        setIsClosed(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getOrderDetails();
+    getAllTheItems();
+  }, [order]);
+
+  return (
+    <>
+      <div>
+        <h2 className="orderTitle">Order#{order.id}</h2>
+        <h4>Customer Name: {order.fullName}</h4>
+        <h4>Customer Email: {order.email}</h4>
+        <h4>Customer Phone: {order.phone}</h4>
+        <h4>Order Type: {order.orderType}</h4>
+        <h4>Payment Type: {order.paymentType}</h4>
+        <h4>Order Status: {order.status ? 'Open' : 'Closed'}</h4>
+        <h4>Order Tip: {order.tip}</h4>
+        <h4>Total Before Tip: {order.itemTotal}</h4>
+        <h4>Order Total With Tip: {order.totalWithTip}</h4>
+        <h4>Date Closed: {order.dateClosed}</h4>
+      </div>
+
+      <h3 className="orderTitle">List of Products:</h3>
+
+      <div>
+        {order.items?.map((item) => (
+          <ItemCard key={item.id} orderObj={order} onUpdate={getOrderDetails} />
+        ))}
+      </div>
+      {isClosed ? '' : (
+        allItems.map((item) => (
+          <ItemCard key={item.id} orderObj={order} onUpdate={getOrderDetails} />
+        ))
+      )}
+    </>
+  );
+}

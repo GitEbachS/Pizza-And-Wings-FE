@@ -2,7 +2,6 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-
 const getAllOrders = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/orders`, {
     method: 'GET',
@@ -15,9 +14,8 @@ const getAllOrders = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-
 const getSingleOrder = (orderId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/order/${id}`, {
+  fetch(`${endpoint}/api/order/${orderId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +37,7 @@ const createOrder = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateMainOrder = (orderId) => new Promise((resolve, reject) => {
+const updateMainOrder = (orderId, payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/orders/${orderId}`, {
     method: 'PUT',
     headers: {
@@ -63,7 +61,6 @@ const updatePaymentOrder = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-
 const deleteOrder = (orderId) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/orders/${orderId}/items`, {
     method: 'DELETE',
@@ -76,7 +73,7 @@ const deleteOrder = (orderId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getRevenue = (orderId) => new Promise((resolve, reject) => {
+const getRevenue = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/total-revenue`, {
     method: 'GET',
     headers: {
@@ -89,5 +86,5 @@ const getRevenue = (orderId) => new Promise((resolve, reject) => {
 });
 
 export {
-  getRevenue, getAllOrders, deleteOrder, updatePaymentOrder, getSingleOrder, createOrder, updateMainOrder, 
-}
+  getRevenue, getAllOrders, deleteOrder, updatePaymentOrder, getSingleOrder, createOrder, updateMainOrder,
+};
