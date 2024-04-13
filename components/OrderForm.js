@@ -11,35 +11,35 @@ const inititalState = {
   lastName: '',
   email: '',
   phone: '',
-  orderTypeId: '',
-  status: true,
+  orderTypeId: -1,
 };
 
 function OrderForm({ orderObj }) {
   const router = useRouter();
   const [formInput, setFormInput] = useState({ ...inititalState });
-  const [type, setType] = useState({});
+  const [types, setTypes] = useState([]);
 
   useEffect(() => {
     if (orderObj.id) setFormInput(orderObj);
-    getOrderTypes().then(setType);
+    getOrderTypes().then(setTypes);
   }, [orderObj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Convert orderTypeId to a number if it's not empty
+    const parsedValue = name === 'orderTypeId' ? Number(value) : value;
     setFormInput((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: parsedValue,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (orderObj.id) {
-      updateMainOrder(formInput).then(() => router.push(`/order/${orderObj.id}`));
+      updateMainOrder(orderObj.id, formInput).then(() => router.push(`/order/${orderObj.id}`));
     } else {
-      const payload = formInput;
-      createOrder(payload).then(() => router.push(`/order/${orderObj.id}`));
+      createOrder(formInput)?.then((order) => router.push(`/order/${order.id}`));
     }
   };
 
@@ -78,22 +78,26 @@ function OrderForm({ orderObj }) {
             required
           />
         </Form.Group>
-        {type ? (
+        {types ? (
           <Form.Group>
             <Form.Select
               aria-label="Type"
-              name="type"
+              name="orderTypeId"
               onChange={handleChange}
               className="mb-3"
-              value={formInput.type}
+              value={formInput.orderTypeId}
               required
             >
               <option value="">Select Order Type</option>
-              <option>Walk-In</option>
-              <option>Phone</option>
+              {types.map((type) => (
+
+                <option key={type.id} value={type.id}>{type.type}</option>
+
+              ))}
+
             </Form.Select>
           </Form.Group>
-        ) : ''}
+        ) : null}
 
         <Form.Group className="mb-3">
 
@@ -119,11 +123,9 @@ OrderForm.propTypes = {
     id: PropTypes.number,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    dateClosed: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
     orderTypeId: PropTypes.number,
-    status: PropTypes.bool,
   }),
 };
 OrderForm.defaultProps = {

@@ -1,9 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 import { getSingleOrder } from '../../controllers/orderApi';
 import ItemCard from '../../components/ItemCard';
 import { getAllItems } from '../../controllers/itemApi';
+import AllItemsCard from '../../components/AllItemsCard';
 
 export default function ViewOrder() {
   const router = useRouter();
@@ -19,7 +22,7 @@ export default function ViewOrder() {
   const getAllTheItems = () => {
     getAllItems().then((items) => {
       setAllItems(items);
-      if (!order.status) {
+      if (order.status === false) {
         setIsClosed(true);
       }
     });
@@ -27,7 +30,13 @@ export default function ViewOrder() {
 
   useEffect(() => {
     getOrderDetails();
-    getAllTheItems();
+  }, [id]);
+
+  useEffect(() => {
+    if (order.status === false) {
+      getAllTheItems();
+      setIsClosed(true);
+    }
   }, [order]);
 
   return (
@@ -44,18 +53,23 @@ export default function ViewOrder() {
         <h4>Total Before Tip: {order.itemTotal}</h4>
         <h4>Order Total With Tip: {order.totalWithTip}</h4>
         <h4>Date Closed: {order.dateClosed}</h4>
+        <Link href={`/order/close/${order.id}`} passHref>
+          <div>
+            <Button id="viewbtn" className="viewBtn m-2">Checkout</Button>
+          </div>
+        </Link>
       </div>
 
-      <h3 className="orderTitle">List of Products:</h3>
+      <h3 className="orderTitle">List of Items:</h3>
 
       <div>
         {order.items?.map((item) => (
-          <ItemCard key={item.id} orderObj={order} onUpdate={getOrderDetails} />
+          <ItemCard key={item.id} orderId={order.id} itemObj={item} onUpdate={getOrderDetails} />
         ))}
       </div>
       {isClosed ? '' : (
         allItems.map((item) => (
-          <ItemCard key={item.id} orderObj={order} onUpdate={getOrderDetails} />
+          <AllItemsCard key={item.id} orderId={order.id} itemObj={item} onUpdate={getOrderDetails} />
         ))
       )}
     </>

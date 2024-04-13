@@ -14,14 +14,14 @@ const deleteOrderItem = (orderId, itemId) => new Promise((resolve, reject) => {
 });
 
 const addItemToOrder = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}order/addItem`, {
+  fetch(`${endpoint}/api/order/addItem`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
+    // .then((response) => response.json())
     .then((data) => resolve(data))
     .catch(reject);
 });
@@ -33,11 +33,28 @@ const getAllItems = () => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
   })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
+const getTheItemsInTheOrder = (orderId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/orderItems/${orderId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
     .then((response) => response.json())
     .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
 
 export {
-  addItemToOrder, deleteOrderItem, getAllItems,
+  addItemToOrder, deleteOrderItem, getAllItems, getTheItemsInTheOrder,
 };
