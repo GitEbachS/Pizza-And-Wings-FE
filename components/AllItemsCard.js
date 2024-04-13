@@ -2,13 +2,13 @@
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { deleteOrderItem } from '../controllers/itemApi';
+import { addItemToOrder } from '../controllers/itemApi';
 
-function ItemCard({ itemObj, orderId, onUpdate }) {
-  const deleteThisItem = () => {
-    if (window.confirm(`Delete ${itemObj.name}?`)) {
-      deleteOrderItem(orderId, itemObj.id).then(() => onUpdate());
-    }
+function AllItemsCard({ itemObj, orderId, onUpdate }) {
+  const handleAddItemClick = () => {
+    addItemToOrder({ orderId, itemId: itemObj.id }).then(() => {
+      onUpdate();
+    });
   };
 
   return (
@@ -19,8 +19,8 @@ function ItemCard({ itemObj, orderId, onUpdate }) {
         <h5 className="card-text bold">{itemObj.orderPrice}</h5>
         {/* <Card.Img variant="top" src={ItemObj.image} alt={ItemObj.name} /> */}
         <div>
-          <Button variant="outline-warning" size="sm" onClick={deleteThisItem} className="deleteBtn m-2">
-            DELETE
+          <Button variant="outline-success" size="sm" onClick={handleAddItemClick} className="deleteBtn m-2">
+            Add Item
           </Button>
         </div>
       </Card>
@@ -28,7 +28,7 @@ function ItemCard({ itemObj, orderId, onUpdate }) {
   );
 }
 
-ItemCard.propTypes = {
+AllItemsCard.propTypes = {
   itemObj: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -38,4 +38,4 @@ ItemCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
 };
 
-export default ItemCard;
+export default AllItemsCard;

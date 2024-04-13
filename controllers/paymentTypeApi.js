@@ -2,7 +2,6 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-
 const getPaymentTypes = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/paymentTypes`, {
     method: 'GET',
@@ -15,4 +14,4 @@ const getPaymentTypes = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getPaymentTypes }
+export default getPaymentTypes;
