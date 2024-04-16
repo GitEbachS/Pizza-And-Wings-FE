@@ -27,14 +27,19 @@ function OrderCard({ orderObj, onUpdate }) {
               <Button id="vieworder" className="viewBtn m-2">VIEW</Button>
             </div>
           </Link>
-          <Link href={`/order/edit/${orderObj.id}`} passHref>
-            <div>
-              <Button id="editorder" className="viewBtn m-2">Update</Button>
-            </div>
-          </Link>
-          <Button id="deleteorder" variant="outline-warning" size="sm" onClick={deleteThisOrder} className="deleteBtn m-2">
-            DELETE
-          </Button>
+          {orderObj.status === true && (
+            <>
+              <Link href={`/order/edit/${orderObj.id}`} passHref>
+                <div>
+                  <Button id="editorder" className="viewBtn m-2">Update</Button>
+                </div>
+              </Link>
+              <Button id="deleteorder" variant="outline-warning" size="sm" onClick={deleteThisOrder} className="deleteBtn m-2">
+                DELETE
+              </Button>
+            </>
+          )}
+
         </div>
       </Card.Body>
     </Card>

@@ -60,6 +60,7 @@ h2, h1 {
 
 .orderTitle{
 font-size: 30px;
+color: rgb(150, 33, 33);
 }
 .wrapper{
   display: flex;
@@ -120,6 +121,14 @@ font-size: 30px;
     background-color: lightgray;
   }
   #signin:hover{
+    background-color: rgb(98, 98, 98);
+  }
+  #signout{
+    color: black;
+    border: darkgray;
+    background-color: lightgray;
+  }
+  #signout:hover{
     background-color: rgb(98, 98, 98);
   }
   .search-bar{

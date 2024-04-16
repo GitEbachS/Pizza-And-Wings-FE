@@ -38,7 +38,7 @@ export default function NavBar() {
             <SearchBar />
           </div>
           <Nav>
-            <Button id="signin" variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+            <Button id="signin" className="copy-btn" variant="danger" type="button" size="lg" onClick={signOut}>
               Sign Out
             </Button>
           </Nav>

@@ -23,7 +23,7 @@ export default function Search() {
   return (
     <>
       <div className="card-container">
-        {filteredOrders.map((order) => <OrderCard key={order.id} orderObj={order} onUpdate={searchOrders} />)}
+        {filteredOrders.map((order) => <OrderCard key={order.id} orderObj={order} onUpdate={searchAllOrders} />)}
       </div>
     </>
   );
