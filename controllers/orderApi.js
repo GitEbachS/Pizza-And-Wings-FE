@@ -89,6 +89,22 @@ const getRevenue = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const searchOrders = (searchValue) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/orders/search/${searchValue}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch search results');
+      }
+      return response.json();
+    })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
 export {
-  getRevenue, getAllOrders, deleteOrder, updatePaymentOrder, getSingleOrder, createOrder, updateMainOrder,
+  getRevenue, getAllOrders, deleteOrder, updatePaymentOrder, getSingleOrder, createOrder, updateMainOrder, searchOrders,
 };

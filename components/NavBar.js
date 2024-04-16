@@ -8,6 +8,7 @@ import {
   Button,
 } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
+import SearchBar from './SearchBar';
 
 export default function NavBar() {
   return (
@@ -32,6 +33,11 @@ export default function NavBar() {
             <Link passHref href="/revenue">
               <Nav.Link>Revenue</Nav.Link>
             </Link>
+          </Nav>
+          <div style={{ marginLeft: '10px', paddingRight: '40px' }}>
+            <SearchBar />
+          </div>
+          <Nav>
             <Button id="signin" variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
               Sign Out
             </Button>

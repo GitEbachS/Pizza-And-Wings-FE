@@ -16,11 +16,11 @@ function OrderCard({ orderObj, onUpdate }) {
     <Card key={orderObj.id} className="card-style" style={{ width: '38rem' }}>
       <Card.Body>
         <Card.Title className="orderTitle">Order#{orderObj.id}</Card.Title>
-        <h4>Customer Name: {orderObj.fullName}</h4>
-        <h4>Customer Email: {orderObj.email}</h4>
-        <h4>Customer Phone: {orderObj.phone}</h4>
+        <h4>Name: {orderObj.fullName}</h4>
+        <h4>Email: {orderObj.email}</h4>
+        <h4>Phone: {orderObj.phone}</h4>
         <h4>Order Type: {orderObj.orderType}</h4>
-        <h4>Order Status: {orderObj.status ? 'Open' : 'Closed'}</h4>
+        <h4>Status: {orderObj.status ? 'Open' : 'Closed'}</h4>
         <div className="wrapper">
           <Link href={`/order/${orderObj.id}`} passHref>
             <div>
