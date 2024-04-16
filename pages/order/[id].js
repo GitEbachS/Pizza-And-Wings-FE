@@ -33,45 +33,61 @@ export default function ViewOrder() {
   }, [id]);
 
   useEffect(() => {
-    if (order.status === false) {
+    if (order.status === true) {
       getAllTheItems();
-      setIsClosed(true);
+      setIsClosed(false);
     }
   }, [order]);
 
   return (
     <>
-      <div>
+      <div className="orderBox">
         <h2 className="orderTitle">Order#{order.id}</h2>
         <h4>Customer Name: {order.fullName}</h4>
         <h4>Customer Email: {order.email}</h4>
         <h4>Customer Phone: {order.phone}</h4>
         <h4>Order Type: {order.orderType}</h4>
-        <h4>Payment Type: {order.paymentType}</h4>
+        <h4>Payment Type: {order.paymentType || '0'}</h4>
         <h4>Order Status: {order.status ? 'Open' : 'Closed'}</h4>
-        <h4>Order Tip: {order.tip}</h4>
+        <h4>Order Tip: {order.tip || '0'}</h4>
         <h4>Total Before Tip: {order.itemTotal}</h4>
-        <h4>Order Total With Tip: {order.totalWithTip}</h4>
-        <h4>Date Closed: {order.dateClosed}</h4>
-        <Link href={`/order/close/${order.id}`} passHref>
-          <div>
-            <Button id="viewbtn" className="viewBtn m-2">Checkout</Button>
+        <h4>Order Total With Tip: {order.totalWithTip || '0'}</h4>
+        <h4>{order.dateClosed ? `Date Closed: ${order.dateClosed}` : ''}</h4>
+
+        {order.items && (
+        <>
+          <h3 className="orderTitle">Items Added:</h3>
+          <div className="d-flex flex-wrap item-container">
+            {order.items?.map((item) => (
+              <ItemCard key={item.id} orderId={order.id} itemObj={item} onUpdate={getOrderDetails} />
+            ))}
           </div>
-        </Link>
+
+        </>
+        )}
+      </div>
+      <div className="menuBox">
+        <div className="d-flex flex-wrap item-container">
+          {isClosed ? '' : (
+            allItems.map((item) => (
+              <AllItemsCard key={item.id} orderId={order.id} itemObj={item} onUpdate={getOrderDetails} />
+            ))
+          )}
+        </div>
       </div>
 
-      <h3 className="orderTitle">List of Items:</h3>
+      {isClosed
+        && (
+          <div>
+            <h2>Menu Items</h2>
+            <Link href={`/order/close/${order.id}`} passHref>
+              <div>
+                <Button id="checkoutBtn" className="viewBtn m-2">Checkout</Button>
+              </div>
+            </Link>
+          </div>
+        )}
 
-      <div>
-        {order.items?.map((item) => (
-          <ItemCard key={item.id} orderId={order.id} itemObj={item} onUpdate={getOrderDetails} />
-        ))}
-      </div>
-      {isClosed ? '' : (
-        allItems.map((item) => (
-          <AllItemsCard key={item.id} orderId={order.id} itemObj={item} onUpdate={getOrderDetails} />
-        ))
-      )}
     </>
   );
 }

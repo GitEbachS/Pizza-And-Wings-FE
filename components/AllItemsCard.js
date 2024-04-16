@@ -14,8 +14,10 @@ function AllItemsCard({ itemObj, orderId, onUpdate }) {
   return (
 
     <div key={itemObj.id}>
-      <h4 className="card-text bold">{itemObj.name}</h4>
-      <Card className="catCard" style={{ width: '16rem', margin: '25px' }}>
+
+      <Card className="itemCard" style={{ width: '16rem', margin: '25px' }}>
+        <Card.Img variant="top" style={{ width: '14rem', margin: '10px' }} src={itemObj.image} alt={itemObj.name} />
+        <h4 className="card-text bold">{itemObj.name}</h4>
         <h5 className="card-text bold">{itemObj.orderPrice}</h5>
         {/* <Card.Img variant="top" src={ItemObj.image} alt={ItemObj.name} /> */}
         <div>
@@ -32,6 +34,7 @@ AllItemsCard.propTypes = {
   itemObj: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    image: PropTypes.string,
     orderPrice: PropTypes.number,
   }).isRequired,
   orderId: PropTypes.number.isRequired,

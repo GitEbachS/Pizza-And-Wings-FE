@@ -1,33 +1,37 @@
 import { Button } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
-import { signOut } from '../utils/auth';
-import { useAuth } from '../utils/context/authContext';
-import { getAllOrders } from '../controllers/orderApi';
-import OrderCard from '../components/OrderCard';
+import Link from 'next/link';
+import Image from 'next/image';
 
 function Home() {
-  const { user } = useAuth();
-  const [orders, setOrders] = useState([]);
-
-  const getTheOrders = () => {
-    getAllOrders()?.then(setOrders);
-  };
-
-  useEffect(() => {
-    getTheOrders();
-  }, [user]);
-
   return (
-    <div>
-      <h1>Hello {user.fbUser.displayName}! </h1>
-      <div>
-        {orders.map((order) => (
-          <OrderCard orderObj={order} onUpdate={getTheOrders} />
-        ))}
+    <div className="closeform-container">
+      <div className="logoWrap">
+        <div>
+          <Image
+            src="https://images.freeimages.com/image/previews/f72/delicious-pizza-flat-design-5692710.png"
+            alt="Delicious Pizza Logo"
+            width={300} // Set the width of the image
+            height={300}
+          />
+        </div>
+        <div>
+          <h1 className="logoName">PIZZ<span className="smallLogo">A</span></h1>
+          <h1 className="logoName"><span className="smallLogo">A</span>ND</h1>
+          <h1 className="logoName">WIN<span className="smallLogo">GS</span></h1>
+        </div>
       </div>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
+
+      <div className="buttonWrap buttonBox">
+        <Link passHref href="/order/new">
+          <Button className="indexBtn">Create Order</Button>
+        </Link>
+        <Link passHref href="/orders">
+          <Button className="indexBtn">View Orders</Button>
+        </Link>
+        <Link passHref href="/revenue">
+          <Button className="indexBtn">Revenue</Button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    color: black;
 }
 
 a {
@@ -18,5 +19,195 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  /* background-image: url('https://i.pinimg.com/736x/b8/25/ec/b825ec03ed690671fbfaea0224154d32.jpg'); */
+  background-color:  rgb(155,161,123);
+  background-size: cover; 
+  background-position: center center;
+}
+h2, h1 {
+  color: #ffffff;
+}
+
+.card-style {
+  background-color: #282828;
+  border-color: #404040;
+  border-width: 3px;
+  color: #ffffff;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  gap: 10px
+}
+
+.orderform-container{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  height: 75vh;
+  }
+  .orderForm{
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+}
+
+  #createorderbtn{
+    width: 150px;
+    color: white;
+    background-color:#404040;
+  }
+  #commentbtn:hover{
+    background-color: rgb(119, 118, 118);
+  }
+  .closeform-container{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 75vh;
+    }
+  .closeForm{
+      display: flex;
+      flex-direction: column;
+      width: 700px;
+  }
+
+  #editorder{
+    background-color: #282828;
+    border-color: #282828;
+  }
+
+  #editorder:hover{
+    background-color: rgb(98, 98, 98);
+  }
+
+
+  #vieworder{
+    background-color: #282828;
+    border-color: #282828;
+  }
+  
+  #vieworder:hover{
+    background-color: rgb(98, 98, 98);
+  }
+  
+  #deleteorder{
+    background-color: #282828;
+    border-color: #282828;
+  }
+  
+  #deleteorder:hover{
+    background-color: rgb(98, 98, 98);
+  }
+
+  #signin{
+    color: black;
+    border: darkgray;
+    background-color: lightgray;
+  }
+  #signin:hover{
+    background-color: rgb(98, 98, 98);
+  }
+  .search-bar{
+    width: 15rem;
+  }
+  .buttonWrap{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    width: 700px;
+    gap: 20px;
+  }
+.indexBtn{
+  width: 350px;
+  border-radius: 1px;
+  border: 1.5px solid rgb(61, 60, 60);
+  color: rgb(61, 60, 60);
+  background-color: #ffffff;
+}
+.indexBtn:hover{
+  border: darkgray;
+  background-color: rgb(98, 98, 98);
+}
+#checkoutBtn{
+  width: 200px;
+  border-radius: 3px;
+  font-size: 30px;
+  border: 1.5px solid rgb(61, 60, 60);
+  color: rgb(61, 60, 60);
+  background-color: #ffffff;
+}
+#checkoutBtn:hover{
+  border: darkgray;
+  background-color: rgb(98, 98, 98);
+}
+.logoName{
+  font-family: Geneva, Verdana, sans-serif;
+  font-style: italic;
+  font-size: 60px;
+  color: rgb(61, 60, 60);
+}
+.logoWrap{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+}
+.smallLogo{
+  font-size: 40px;
+  color: rgb(61, 60, 60);
+}
+.buttonBox{
+  border: 1.5px solid rgb(61, 60, 60);
+  background-color: #ffffff;
+  height: 270px;
+}
+.revBox{
+
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+  color: rgb(61, 60, 60);
+  background-color: #ffffff;
+  border: 1.7px solid rgb(61, 60, 60);
+  width: 300px;
+  
+}
+.rev-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  gap: 30px;
+  margin-top: 100px;
+}
+
+.itemCard{
+  height: 300px;
+}
+.itemCard Img {
+  height: 150px;
+  object-fit: cover 
+}
+.item-container{
+  align-items: stretch;
+}
+.orderBox{
+  margin: 20px;
+background-color: gray;
+border: 2px solid white;
+}
+.menuBox{
+
+}
+.orderItem{
+  background-color: #404040;
+  color: white;
 }

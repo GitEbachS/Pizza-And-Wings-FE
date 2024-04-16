@@ -13,7 +13,7 @@ function OrderCard({ orderObj, onUpdate }) {
   };
 
   return (
-    <Card className="card-style" style={{ width: '38rem' }}>
+    <Card key={orderObj.id} className="card-style" style={{ width: '38rem' }}>
       <Card.Body>
         <Card.Title className="orderTitle">Order#{orderObj.id}</Card.Title>
         <h4>Customer Name: {orderObj.fullName}</h4>
@@ -24,15 +24,15 @@ function OrderCard({ orderObj, onUpdate }) {
         <div className="wrapper">
           <Link href={`/order/${orderObj.id}`} passHref>
             <div>
-              <Button id="viewbtn" className="viewBtn m-2">VIEW</Button>
+              <Button id="vieworder" className="viewBtn m-2">VIEW</Button>
             </div>
           </Link>
           <Link href={`/order/edit/${orderObj.id}`} passHref>
             <div>
-              <Button id="viewbtn" className="viewBtn m-2">Update</Button>
+              <Button id="editorder" className="viewBtn m-2">Update</Button>
             </div>
           </Link>
-          <Button variant="outline-warning" size="sm" onClick={deleteThisOrder} className="deleteBtn m-2">
+          <Button id="deleteorder" variant="outline-warning" size="sm" onClick={deleteThisOrder} className="deleteBtn m-2">
             DELETE
           </Button>
         </div>
