@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
 import { getRevenue } from '../controllers/orderApi';
 
 function ViewRevenue() {
@@ -15,13 +13,14 @@ function ViewRevenue() {
   }, []);
 
   return (
-    <div>
-      <h1>Revenue for Total Order Sales</h1>
-      <h3>{rev.totalItemTotal}</h3>
+    <div className="rev-container">
+      <div>
+        <h1>Revenue for Total Order Sales</h1>
+      </div>
 
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
+      <div className="revBox">
+        <h3>{rev.totalItemTotal}</h3>
+      </div>
 
     </div>
 

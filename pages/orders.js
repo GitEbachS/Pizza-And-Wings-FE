@@ -19,11 +19,12 @@ function Home() {
 
   return (
     <div>
-      <h1>Hello {user.fbUser.displayName}! </h1>
-      <div>
+      <h1>Hello Staff Member: {user.fbUser.displayName}! </h1>
+      <div className="card-container">
         {orders.map((order) => (
-          <OrderCard orderObj={order} onUpdate={getTheOrders} />
+          <OrderCard key={order.id} orderObj={order} onUpdate={getTheOrders} />
         ))}
+
       </div>
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
