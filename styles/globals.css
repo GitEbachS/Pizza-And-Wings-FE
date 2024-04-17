@@ -28,11 +28,13 @@ h2, h1 {
   color: #ffffff;
 }
 
+/* ORDERS */
 .card-style {
-  background-color: #282828;
-  border-color: #404040;
-  border-width: 3px;
   color: #ffffff;
+  border: 3px solid rgb(61, 60, 60);
+  color: rgb(61, 60, 60);
+  background-color: #ffffff;
+  font-size: 16px;
 }
 
 .card-container {
@@ -56,6 +58,15 @@ h2, h1 {
     width: 700px;
 }
 
+.orderTitle{
+font-size: 30px;
+color: rgb(150, 33, 33);
+}
+.wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
   #createorderbtn{
     width: 150px;
     color: white;
@@ -110,6 +121,14 @@ h2, h1 {
     background-color: lightgray;
   }
   #signin:hover{
+    background-color: rgb(98, 98, 98);
+  }
+  #signout{
+    color: black;
+    border: darkgray;
+    background-color: lightgray;
+  }
+  #signout:hover{
     background-color: rgb(98, 98, 98);
   }
   .search-bar{

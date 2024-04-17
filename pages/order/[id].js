@@ -13,7 +13,6 @@ export default function ViewOrder() {
   const { id } = router.query;
   const [order, setOrder] = useState({});
   const [allItems, setAllItems] = useState([]);
-  const [isClosed, setIsClosed] = useState(false);
 
   const getOrderDetails = () => {
     getSingleOrder(id)?.then(setOrder);
@@ -22,9 +21,6 @@ export default function ViewOrder() {
   const getAllTheItems = () => {
     getAllItems().then((items) => {
       setAllItems(items);
-      if (order.status === false) {
-        setIsClosed(true);
-      }
     });
   };
 
@@ -35,7 +31,6 @@ export default function ViewOrder() {
   useEffect(() => {
     if (order.status === true) {
       getAllTheItems();
-      setIsClosed(false);
     }
   }, [order]);
 
@@ -68,25 +63,26 @@ export default function ViewOrder() {
       </div>
       <div className="menuBox">
         <div className="d-flex flex-wrap item-container">
-          {isClosed ? '' : (
-            allItems.map((item) => (
+          {order.status === true && (
+          <>
+            <h2>Menu Items</h2>
+            {allItems.map((item) => (
               <AllItemsCard key={item.id} orderId={order.id} itemObj={item} onUpdate={getOrderDetails} />
-            ))
+            ))}
+          </>
           )}
         </div>
       </div>
 
-      {isClosed
-        && (
+      {order.status === true && (
+      <div>
+        <Link href={`/order/close/${order.id}`} passHref>
           <div>
-            <h2>Menu Items</h2>
-            <Link href={`/order/close/${order.id}`} passHref>
-              <div>
-                <Button id="checkoutBtn" className="viewBtn m-2">Checkout</Button>
-              </div>
-            </Link>
+            <Button id="checkoutBtn" className="viewBtn m-2">Checkout</Button>
           </div>
-        )}
+        </Link>
+      </div>
+      )}
 
     </>
   );

@@ -26,7 +26,7 @@ function Home() {
         ))}
 
       </div>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+      <Button id="signout" variant="danger" type="button" size="lg" className="copy-btn signin" onClick={signOut}>
         Sign Out
       </Button>
     </div>
