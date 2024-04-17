@@ -10,7 +10,7 @@ function Home() {
           <Image
             src="https://images.freeimages.com/image/previews/f72/delicious-pizza-flat-design-5692710.png"
             alt="Delicious Pizza Logo"
-            width={300} // Set the width of the image
+            width={300}
             height={300}
           />
         </div>

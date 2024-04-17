@@ -139,7 +139,7 @@ color: rgb(150, 33, 33);
     justify-content: center; 
     align-items: center;
     flex-direction: column;
-    width: 700px;
+    min-width: 400px;
     gap: 20px;
   }
 .indexBtn{
@@ -160,6 +160,7 @@ color: rgb(150, 33, 33);
   border: 1.5px solid rgb(61, 60, 60);
   color: rgb(61, 60, 60);
   background-color: #ffffff;
+  margin-bottom: 100px;
 }
 #checkoutBtn:hover{
   border: darkgray;
@@ -209,24 +210,44 @@ color: rgb(150, 33, 33);
 }
 
 .itemCard{
-  height: 300px;
+  height: 330px;
+  padding: 10px;
 }
 .itemCard Img {
   height: 150px;
   object-fit: cover 
 }
-.item-container{
-  align-items: stretch;
-}
+
 .orderBox{
-  margin: 20px;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-around;
+margin: 20px;
+padding: 20px;
 background-color: gray;
 border: 2px solid white;
 }
 .menuBox{
-
+  width: 1100px;
 }
 .orderItem{
   background-color: #404040;
   color: white;
+}
+.item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  margin: auto;
+ 
+}
+.menuCenter{
+text-align: center;
+font-size: 35px;
+display: block;
+width: 100%;
+margin-top: 10px;;
 }
